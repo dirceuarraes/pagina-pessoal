@@ -1,0 +1,5 @@
+nome,descricao,capacidade_campo,ponto_murcha,densidade,condutividade_hidraulica
+Argiloso,Solo com alta porcentagem de argila,0.36,0.18,1.35,8.0
+Arenoso,Solo com alta porcentagem de areia,0.15,0.07,1.60,25.0
+Franco,Solo com textura media,0.28,0.12,1.45,15.0
+Franco-Argiloso,Solo com equilibrio entre areia e argila,0.32,0.15,1.38,12.0

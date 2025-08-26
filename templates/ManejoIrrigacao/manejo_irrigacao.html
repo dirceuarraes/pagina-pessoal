@@ -1,0 +1,73 @@
+{% extends 'shared/base.html' %}
+{% block content %}
+
+    <h1>Calculadora de Manejo de Irrigação</h1>
+
+        <form action="{% url 'manejo_irrigacao' %}" method="POST" class="eto-form">
+            {% csrf_token %}
+            <!-- Campo Cultura -->
+            <div class="form-group">
+                <label>{{ form.cultura.label }}</label>
+                    {{ form.cultura }}
+            </div>
+
+           <!-- Campo Solo -->
+            <div class="form-group">
+                <label>{{ form.solo.label }}</label>
+                {{ form.solo }}
+            </div>
+
+            <!-- Campo Fase -->
+            <div class="form-group">
+                <label>{{ form.fase.label }}</label>
+                {{ form.fase }}
+            </div>
+
+            <!-- Campo Sistema -->
+            <div class="form-group">
+                <label>{{ form.sistema.label }}</label>
+                {{ form.sistema }}
+            </div>
+
+    
+            <div class="form-group">
+                <label>{{ form.VazaoEmissor.label }}</label>{{ form.VazaoEmissor }}
+            </div>
+
+            <div class="form-group">
+                <label>{{ form.espacamentoEmissor.label }}</label>{{ form.espacamentoEmissor }}
+            </div>
+
+            <div class="form-group">
+                <label>{{ form.espacamentoLinha.label }}</label>{{ form.espacamentoLinha }}
+            </div>
+    
+            <div class="form-group">
+                <label>{{ form.raiomolhado.label }}</label>{{ form.raiomolhado }}
+            </div>
+    
+            <div class="form-group">
+                <label>{{ form.eficIrrigacao.label }}</label>{{ form.eficIrrigacao }}
+            </div>
+
+            
+    
+            <button type="submit" class="btn-calcular">Calcular</button>
+        </form>
+
+        {% if Resultados %}
+         <div class="eto-form">
+                <h2>Resultados do Manejo de Irrigação</h2>
+      
+                <ul>                    
+                    <li>Profundidade do Sistema Radicular (Z): <strong>{{ Resultados.Z }}</strong>mm</li>
+                    <li>Lâmina Líquida (LL): <strong>{{ Resultados.LL }}</strong>mm</li>
+                    <li>Lâmina Bruta (LB): <strong>{{ Resultados.LB }}</strong>mm</li>
+                    <li>Tempo de Irrigação (Ti): <strong>{{ Resultados.Ti }}</strong></li>
+            
+                </ul>
+        </div>
+           
+        {% endif %}
+
+{% endblock %}

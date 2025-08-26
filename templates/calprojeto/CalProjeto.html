@@ -1,0 +1,159 @@
+{% extends 'shared/base.html' %}
+{% block content %}
+
+    <h1>Projeto de Irrigação Pressurizada para Pequenas Áreas</h1>
+        
+        <form action="{% url 'CalProjeto' %}" method="POST" class="eto-form">
+            {% csrf_token %}
+
+            <h3>Informações do Sistema de Irrigação</h3>
+
+            <div class="form-group">
+                <label>{{ form.sistema.label }}</label>
+                    {{ form.sistema }}
+            </div>
+
+            
+            <div class="form-group">
+                <label>{{ form.qemissor.label }}</label>{{ form.qemissor }}
+            </div>
+
+            
+            <div class="form-group">
+                <label>{{ form.PS.label }}</label>{{ form.PS }}
+            </div>
+
+            <div class="form-group">
+                <label>{{ form.Ee.label }}</label>{{ form.Ee }}
+            </div>
+
+            <div class="form-group">
+                <label>{{ form.EL.label }}</label>{{ form.EL }}
+            </div>
+
+            <div class="form-group">
+                <label>{{ form.AlturaEmissor.label }}</label>{{ form.AlturaEmissor }}
+            </div>
+
+            <div class="form-group">
+                <label>{{ form.Fator.label }}</label>{{ form.Fator }}
+            </div>
+
+            
+            <div class="form-group">
+                <label>{{ form.Qdisp.label }}</label>{{ form.Qdisp }}
+            </div>
+
+            <h3>Informações da Linha Lateral</h3>
+
+            
+            <div class="form-group">
+                <label>{{ form.materialLL.label }}</label>
+                    {{ form.materialLL }}
+            </div>
+            
+            <div class="form-group">
+                <label>{{ form.metodosLL.label }}</label>
+                    {{ form.metodosLL }}
+            </div>
+            
+    
+            <div class="form-group">
+                <label>{{ form.comprimentoLL.label }}</label>{{ form.comprimentoLL }}
+            </div>
+
+            <div class="form-group">
+                <label>{{ form.declividadeLL.label }}</label>{{ form.declividadeLL }}
+            </div>
+
+             <h3>Informações das Linhas de Derivação, Principal e Sucção</h3>
+
+             <div class="form-group">
+                <label>{{ form.materialLDPS.label }}</label>
+                    {{ form.materialLDPS }}
+            </div>
+            
+            <div class="form-group">
+                <label>{{ form.metodosLDPS.label }}</label>
+                    {{ form.metodosLDPS }}
+            </div>
+            
+
+            <div class="form-group">
+                <label>{{ form.comprimentoLD.label }}</label>{{ form.comprimentoLD }}
+            </div>
+
+            <div class="form-group">
+                <label>{{ form.declividadeLD.label }}</label>{{ form.declividadeLD }}
+            </div>  
+            
+            <div class="form-group">
+                <label>{{ form.linhasdoissentidos.label }}</label>
+                    {{ form.linhasdoissentidos }}
+            </div>
+            
+            
+            <div class="form-group">
+                <label>{{ form.comprimentoLP.label }}</label>{{ form.comprimentoLP }}
+            </div>
+
+            <div class="form-group">
+                <label>{{ form.declividadeLP.label }}</label>{{ form.declividadeLP }}
+            </div>
+
+            <div class="form-group">
+                <label>{{ form.velocidademax.label }}</label>{{ form.velocidademax }}
+            </div>
+
+            <div class="form-group">
+                <label>{{ form.comprimentoLS.label }}</label>{{ form.comprimentoLS }}
+            </div>
+
+            <div class="form-group">
+                <label>{{ form.AlturaS.label }}</label>{{ form.AlturaS }}
+            </div>
+
+
+    
+            <button type="submit" class="btn-calcular">Calcular</button>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} mb-3">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        </form>
+
+
+        
+      
+        {% if Resultados is not None %}
+            <div class="eto-form">
+                <h2>Resultados do Projeto Hidráulico</h2>
+      
+                <ul>
+                    <li>Sistema: <strong>{{ Resultados.resumo.sistema }}</strong></li>
+                    <li>Emissores na lateral (Ne): <strong>{{ Resultados.resumo.Ne }}</strong></li>
+                    <li>Nº de laterais (NLL): <strong>{{ Resultados.resumo.NLL }}</strong></li>
+                    <li>Setores (Ns): <strong>{{ Resultados.resumo.Ns }}</strong></li>
+                    <li>QLL: <strong>{{ Resultados.resumo.QLL|floatformat:2 }}</strong> L/h</li>
+                    <li>Qproj: <strong>{{ Resultados.resumo.Qproj|floatformat:2 }}</strong> L/h</li>
+                    <li>Qdisp: <strong>{{ Resultados.resumo.Qdisp|floatformat:2 }}</strong> L/h</li>                    
+                    <li>Diâmetro Linha Lateral Adotado: <strong>{{ Resultados.lateral.DLLadot|floatformat:3 }}</strong> m</li>
+                    <li>hfLL: <strong>{{ Resultados.lateral.hfLL|floatformat:2 }}</strong> m</li>
+                    <li>PinLL: <strong>{{ Resultados.lateral.PinLL|floatformat:2 }}</strong> m</li>
+                    <li>Diâmetro Linha de Derivação Adotado: <strong>{{ Resultados.derivacao.DLDadot|floatformat:3 }}</strong> m</li>
+                    <li>hfLD: <strong>{{ Resultados.derivacao.hfLD|floatformat:2 }}</strong> m</li>
+                    <li>Diâmetro Linha Principal Adotado: <strong>{{ Resultados.principal.DLPadot|floatformat:3 }}</strong> m</li>
+                    <li>hfLP: <strong>{{ Resultados.principal.hfLP|floatformat:2 }}</strong> m</li>
+                    <li>Diâmetro Linha de Sucção Adotado: <strong>{{ Resultados.succao.DLSadot|floatformat:3 }}</strong> m</li>
+                    <li>hfLS: <strong>{{ Resultados.succao.hfLS|floatformat:2 }}</strong> m</li>
+                    <li>Altura manométrica: <strong>{{ Resultados.succao.Hm|floatformat:2 }}</strong> m</li>
+                </ul>
+        </div>
+        {% endif %}
+
+
+    
+
+{% endblock %}

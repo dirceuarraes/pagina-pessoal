@@ -1,0 +1,62 @@
+{% extends 'shared/base.html' %}
+{% block content %}
+
+    <h1>Calculadora de ETo</h1>
+
+        <form action="{% url 'ETo' %}" method="POST" class="eto-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>{{ form.metodos.label }}</label>
+                {{ form.metodos }}
+            </div>
+           
+    
+            <div class="form-group">
+                <label>{{ form.data.label }}</label>{{ form.data }}
+            </div>
+
+            <div class="form-group">
+                <label>{{ form.Latitude.label }}</label>{{ form.Latitude }}
+            </div>
+
+            <div class="form-group">
+                <label>{{ form.Altitude.label }}</label>{{ form.Altitude }}
+            </div>
+    
+            <div class="form-group">
+                <label>{{ form.Tx.label }}</label>{{ form.Tx }}
+            </div>
+    
+            <div class="form-group">
+                <label>{{ form.Tn.label }}</label>{{ form.Tn }}
+            </div>
+
+            <div class="form-group">
+                <label>{{ form.Tm.label }}</label>{{ form.Tm }}
+            </div>
+    
+            <div class="form-group">
+                <label>{{ form.vento.label }}</label>{{ form.vento }}
+            </div>
+    
+            <div class="form-group">
+                <label>{{ form.UR.label }}</label>{{ form.UR }}
+            </div>
+    
+            <div class="form-group">
+                <label>{{ form.Radglobal.label }}</label>{{ form.Radglobal }}
+            </div>
+    
+            <button type="submit" class="btn-calcular">Calcular ETo</button>
+        </form>
+
+        {% if resultado is not None %}
+        <div class="eto-form">
+            <h2 class="form-group"> Resultado da ETo </h2>
+           <p class="ETo-resul"> Método de <strong>{{detalhe}}</strong></p>       
+            <p class="ETo-resul">ETo = <strong>{{ resultado|floatformat:2 }}</strong> mm/dia</p>
+        </div>
+           
+        {% endif %}
+
+{% endblock %}

@@ -1,0 +1,43 @@
+
+{% extends 'shared/base.html' %}
+{% block content %}
+
+    <h1>Calculadora de Perda de Carga</h1>
+
+        <form action="{% url 'calhf' %}" method="POST" class="eto-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>{{ form.metodos.label }}</label>
+                {{ form.metodos }}
+            </div>
+            
+            <div class="form-group">
+                <label>{{ form.material.label }}</label>
+                {{ form.material }}
+            </div>
+                
+            <div class="form-group">
+                <label>{{ form.comprimento.label }}</label>{{ form.comprimento }}
+            </div>
+
+            <div class="form-group">
+                <label>{{ form.diametro.label }}</label>{{ form.diametro }}
+            </div>
+
+            <div class="form-group">
+                <label>{{ form.vazao.label }}</label>{{ form.vazao }}
+            </div>               
+    
+            <button type="submit" class="btn-calcular">Calcular hf</button>
+        </form>
+
+        {% if resultado is not None %}
+        <div class="eto-form">
+            <h2 class="form-group"> Resultado da Perda de Carga </h2>
+           <p class="ETo-resul"> Método de <strong>{{detalhe}}</strong></p>       
+            <p class="ETo-resul">hf = <strong>{{ resultado|floatformat:2 }}</strong> m</p>
+        </div>
+           
+        {% endif %} 
+
+{% endblock %}
