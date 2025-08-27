@@ -1,0 +1,132 @@
+[
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$Xluk4roskBtLn7r1jQ7TMY$UQreUoWp/CB3mOjSrsEzX+R+/S96JCodas2QGIlGnBI=",
+    "last_login": "2025-08-25T16:59:22.730Z",
+    "is_superuser": true,
+    "username": "dirceu",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-08-25T13:22:28.878Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "culturas.cultura",
+  "pk": 1,
+  "fields": {
+    "nome": "Milho",
+    "kc_inicial": 0.3,
+    "kc_medio": 1.2,
+    "kc_final": 0.6,
+    "z_min": 0.3,
+    "z_max": 1.0,
+    "p": 0.55
+  }
+},
+{
+  "model": "culturas.cultura",
+  "pk": 2,
+  "fields": {
+    "nome": "Soja",
+    "kc_inicial": 0.4,
+    "kc_medio": 1.15,
+    "kc_final": 0.5,
+    "z_min": 0.4,
+    "z_max": 1.2,
+    "p": 0.5
+  }
+},
+{
+  "model": "culturas.cultura",
+  "pk": 3,
+  "fields": {
+    "nome": "Feijao",
+    "kc_inicial": 0.35,
+    "kc_medio": 1.1,
+    "kc_final": 0.45,
+    "z_min": 0.3,
+    "z_max": 0.8,
+    "p": 0.5
+  }
+},
+{
+  "model": "culturas.cultura",
+  "pk": 4,
+  "fields": {
+    "nome": "Trigo",
+    "kc_inicial": 0.3,
+    "kc_medio": 1.1,
+    "kc_final": 0.4,
+    "z_min": 0.3,
+    "z_max": 1.0,
+    "p": 0.55
+  }
+},
+{
+  "model": "culturas.cultura",
+  "pk": 5,
+  "fields": {
+    "nome": "Algodao",
+    "kc_inicial": 0.35,
+    "kc_medio": 1.2,
+    "kc_final": 0.7,
+    "z_min": 0.4,
+    "z_max": 1.2,
+    "p": 0.5
+  }
+},
+{
+  "model": "solos.solo",
+  "pk": 1,
+  "fields": {
+    "nome": "Argiloso",
+    "descricao": "Solo com alta porcentagem de argila",
+    "capacidade_campo": 0.36,
+    "ponto_murcha": 0.18,
+    "densidade": 1.35,
+    "condutividade_hidraulica": 8.0
+  }
+},
+{
+  "model": "solos.solo",
+  "pk": 2,
+  "fields": {
+    "nome": "Arenoso",
+    "descricao": "Solo com alta porcentagem de areia",
+    "capacidade_campo": 0.15,
+    "ponto_murcha": 0.07,
+    "densidade": 1.6,
+    "condutividade_hidraulica": 25.0
+  }
+},
+{
+  "model": "solos.solo",
+  "pk": 3,
+  "fields": {
+    "nome": "Franco",
+    "descricao": "Solo com textura media",
+    "capacidade_campo": 0.28,
+    "ponto_murcha": 0.12,
+    "densidade": 1.45,
+    "condutividade_hidraulica": 15.0
+  }
+},
+{
+  "model": "solos.solo",
+  "pk": 4,
+  "fields": {
+    "nome": "Franco-Argiloso",
+    "descricao": "Solo com equilibrio entre areia e argila",
+    "capacidade_campo": 0.32,
+    "ponto_murcha": 0.15,
+    "densidade": 1.38,
+    "condutividade_hidraulica": 12.0
+  }
+}
+]

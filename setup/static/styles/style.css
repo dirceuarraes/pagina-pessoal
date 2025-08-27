@@ -249,6 +249,24 @@ p {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+.social-logos{
+  display: flex;
+  align-items: center;   /* alinha verticalmente */
+  gap: 28px;             /* espaço entre as figuras (ajuste à vontade) */
+}
+
+.social-logos a{
+  text-decoration: none; /* remove sublinhado roxinho */
+  line-height: 0;        /* evita “sombra” de linha abaixo do ícone */
+}
+
+.social-logos img{
+  height: 28px;          /* padronize o tamanho */
+  width: auto;
+  display: block;
+}
+
+
 .form-group {
     margin-bottom: 1.2rem;
 }
@@ -330,4 +348,5 @@ li {
   font-size: 1.2rem;
   color: #2E7D32;
 }
+
 
