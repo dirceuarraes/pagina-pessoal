@@ -71,5 +71,12 @@ class CalManejoForm(forms.Form):
         widget=forms.NumberInput(attrs={"class":"form-control"})
     )
 
+    Uatual = forms.FloatField(
+        label = "Umidade Atual à Base de Massa (g/g)",
+        min_value = 0.1,
+        max_value = 1,
+        widget=forms.NumberInput(attrs={"class":"form-control"})
+    )
+
     
     

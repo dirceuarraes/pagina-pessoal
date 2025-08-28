@@ -23,43 +23,50 @@ def manejo_irrigacao(request):
             raiomolhado = form.cleaned_data['raiomolhado']
             Ea = form.cleaned_data['eficIrrigacao']
             Ea = Ea / 100  # Convertendo para decimal
+            Uatual = form.cleaned_data['Uatual']
+
 
             #Agora vamos usar os dados do formulário para pegar as informações nos bancos de dados
             # Informações do Solo
             Ucc = solo.capacidade_campo
-            Upmp = solo.ponto_murcha
-            ds = solo.densidade
-            # Informações da Cultura
-            if fase == 'FI':
-               # Kc = cultura.kc_inicial
-                Z = cultura.z_min*1000 # Convertendo para mm
-            
-            elif fase == 'FM':
-               # Kc = cultura.kc_medio
-                Z = (cultura.z_min + cultura.z_max) / 2*1000 # Convertendo para mm
+
+            if Uatual >= Ucc:
+                messages.error(request, "A Umidade Atual não pode ser maior ou igual a Umidade em Capacidade de Campo.")
+                return render(request, 'ManejoIrrigacao/manejo_irrigacao.html', {'form': form, 'Resultados': Resultados,})
             else:
+            
+                ds = solo.densidade
+                # Informações da Cultura
+                if fase == 'FI':
+                # Kc = cultura.kc_inicial
+                    Z = cultura.z_min*1000 # Convertendo para mm
+            
+                elif fase == 'FM':
+               # Kc = cultura.kc_medio
+                    Z = (cultura.z_min + cultura.z_max) / 2*1000 # Convertendo para mm
+                else:
                # Kc = cultura.kc_final
-                Z = cultura.z_max*1000  # Convertendo para mm
+                    Z = cultura.z_max*1000  # Convertendo para mm
             # Cálculos:
             # Lâmina Líquida (LL), 
-            LL = (Ucc - Upmp)*ds*Z
+                LL = (Ucc - Uatual)*ds*Z
             # Lâmina Bruta (LB)
-            LB = LL/Ea
+                LB = LL/Ea
             # Área molhada (Am)
-            if sistema == 'ILM' or sistema == 'ILG':
-                Am = math.pi * (raiomolhado**2)
-                Am=min(espacamentoEmissor* espacamentoLinha, math.pi * (raiomolhado**2))
-            else:
-                Am = espacamentoEmissor * espacamentoLinha
+                if sistema == 'ILM' or sistema == 'ILG':
+                    Am = math.pi * (raiomolhado**2)
+                    Am=min(espacamentoEmissor* espacamentoLinha, math.pi * (raiomolhado**2))
+                else:
+                    Am = espacamentoEmissor * espacamentoLinha
             # Tempo de Irrigação (Ti)
-            Ti = LB*Am/VazaoEmissor
-            Horas = int(Ti)
-            Min = int((Ti - Horas) * 60)
-            Resultados = {                
-                'Z': round(Z, 2),
-                'LL': round(LL, 2),
-                'LB': round(LB, 2),
-                'Ti': f"{Horas} h e {Min} min",
+                Ti = LB*Am/VazaoEmissor
+                Horas = int(Ti)
+                Min = int((Ti - Horas) * 60)
+                Resultados = {                
+                    'Z': round(Z, 2),
+                    'LL': round(LL, 2),
+                    'LB': round(LB, 2),
+                    'Ti': f"{Horas} h e {Min} min",
 
             }
     else:
