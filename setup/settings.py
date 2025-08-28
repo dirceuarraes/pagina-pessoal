@@ -26,10 +26,10 @@ load_dotenv(BASE_DIR / ".env")
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(int(os.getenv('DEBUG', default=0)))
 
-ALLOWED_HOSTS = ["dirceuarraes.pythonanywhere.com", "localhost", "127.0.0.1"]
-
+#ALLOWED_HOSTS = ["dirceuarraes.pythonanywhere.com", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
 
 # Application definition
 
@@ -53,6 +53,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -84,28 +85,28 @@ WSGI_APPLICATION = 'setup.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dbpessoal',
-        'USER': 'ppdirceu',
-        'PASSWORD': 'M@ris@_23#09',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-            'charset': 'utf8mb4',
-        }
-    }
-}
-
-
 #DATABASES = {
 #    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': os.getenv('NAME'),
+#        'USER': os.getenv('USER'),
+#        'PASSWORD': os.getenv('PASSWORD'),
+#        'HOST': os.getenv('HOST'), # or 'dirceuarraes.#mysql.pythonanywhere-services.com',
+#        'PORT': os.getenv('PORT', '3306'),
+#        'OPTIONS': {
+#            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+#            'charset': 'utf8mb4',
+#        }
 #    }
 #}
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 #DATABASES = {
 #    'default': {
@@ -158,13 +159,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+#STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'setup/static')
-]
+#STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, '/static')
+#]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# No final do settings.py, adicione:
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']  # Para desenvolvimento
+STATIC_ROOT = BASE_DIR / 'staticfiles'    # Para produção
+
+# Configuração do WhiteNoise
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # Default primary key field type
